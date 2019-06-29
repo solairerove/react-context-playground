@@ -14,18 +14,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <div>
-          Select language:
-          <i
-            className="flag us"
-            onClick={() => this.onLanguageChange('english')}
-          />
-          <i
-            className="flag ua"
-            onClick={() => this.onLanguageChange('ukraine')}
-          />
-        </div>
-        <LanguageSelector />
+        <LanguageSelector onLanguageChange={this.onLanguageChange} />
         <ColorContext.Provider value="red">
           <LanguageContext.Provider value={this.state.language}>
             <UserCreate />
