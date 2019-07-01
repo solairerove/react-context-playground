@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const Context = React.createContext('english');
@@ -5,19 +6,22 @@ const Context = React.createContext('english');
 export class LanguageStore extends React.Component {
   state = { language: 'english' };
 
-  onLanguageChange = language => {
+  onLanguageChange = (language) => {
     this.setState({ language });
   };
 
   render() {
+    const { children } = this.props;
     return (
-      <Context.Provider
-        value={{ ...this.state, onLanguageChange: this.onLanguageChange }}
-      >
-        {this.props.children}
+      <Context.Provider value={{ ...this.state, onLanguageChange: this.onLanguageChange }}>
+        {children}
       </Context.Provider>
     );
   }
 }
+
+LanguageStore.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+};
 
 export default Context;
